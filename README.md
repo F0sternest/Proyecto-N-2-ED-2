@@ -1,6 +1,7 @@
 # Cambios Recientes en el programa
 - Creado el menu principal
 - Copiada la hoja de presentacion
+- Test.py es solamente para hacer pruebas con las librerias, una vez implementadas se puede eliminar este archivo
 
 # Proyecto-N-2-ED-2
 <p>Haga una aplicación que encuentre las rutas entre ciudades. Solicite el nombre de las
