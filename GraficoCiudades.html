@@ -12,7 +12,7 @@
 <style type="text/css">
 
         #mynetwork {
-            width: 650px;
+            width: 850px;
             height: 650px;
             background-color: #ffffff;
             border: 1px solid lightgray;
@@ -50,8 +50,8 @@
         
 
         // parsing and collecting nodes and edges from the python
-        nodes = new vis.DataSet([{"color": "red", "id": "Ciudad A", "label": "Ciudad A", "shape": "dot", "size": 10}, {"color": "blue", "id": "Ciudad B", "label": "Ciudad B", "shape": "dot", "size": 10}, {"color": "green", "id": "Ciudad C", "label": "Ciudad C", "shape": "dot", "size": 10}]);
-        edges = new vis.DataSet([{"from": "Ciudad A", "label": 1, "to": "Ciudad B", "weight": 1}, {"from": "Ciudad A", "label": 1, "to": "Ciudad C", "weight": 1}]);
+        nodes = new vis.DataSet([{"id": "I", "label": "I", "shape": "dot", "size": 10}, {"id": "A", "label": "A", "shape": "dot", "size": 10}, {"id": "C", "label": "C", "shape": "dot", "size": 10}, {"id": "D", "label": "D", "shape": "dot", "size": 10}, {"id": "B", "label": "B", "shape": "dot", "size": 10}, {"id": "F", "label": "F", "shape": "dot", "size": 10}, {"id": "E", "label": "E", "shape": "dot", "size": 10}, {"id": "T", "label": "T", "shape": "dot", "size": 10}]);
+        edges = new vis.DataSet([{"from": "I", "label": 10, "to": "A", "weight": 10}, {"from": "I", "label": 10, "to": "C", "weight": 10}, {"from": "A", "label": 40, "to": "D", "weight": 40}, {"from": "B", "label": 50, "to": "A", "weight": 50}, {"from": "B", "label": 60, "to": "C", "weight": 60}, {"from": "B", "label": 10, "to": "D", "weight": 10}, {"from": "B", "label": 80, "to": "F", "weight": 80}, {"from": "C", "label": 10, "to": "F", "weight": 10}, {"from": "D", "label": 2, "to": "E", "weight": 2}, {"from": "D", "label": 18, "to": "T", "weight": 18}, {"from": "E", "label": 9, "to": "T", "weight": 9}, {"from": "F", "label": 2, "to": "T", "weight": 2}]);
 
         // adding nodes and edges to the graph
         data = {nodes: nodes, edges: edges};
