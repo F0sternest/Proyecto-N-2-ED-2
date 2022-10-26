@@ -2,6 +2,7 @@ import time
 from os import system
 import networkx as nx
 from pyvis.network import Network
+import matplotlib.pyplot as plt
 
 def obtenerOpcion():
     correcto = False
@@ -17,6 +18,7 @@ def obtenerOpcion():
 
 PAUSE_DURATION = 2.5
 exit = True
+grafoCreado = False
 while exit:
     system('cls')
     print('BIENVENIDO/A A NUESTRA APLICACION DE UN GRAFO')
@@ -51,6 +53,7 @@ while exit:
 
         input()
     elif opcionMenuPrincipal == 2:
+        grafoCreado = True
         grafoCiudades = nx.DiGraph()
         nombresCiudades = []
         caminoCiudades = []
@@ -67,8 +70,8 @@ while exit:
         for x in range(cantidadCiudades):
             nombresCiudades.append(input(f'Ingrese el nombre de la ciudad {x+1}: '))
         
-        print('Ahora porfavor escriba las rutas existentes entre las ciudades: ')
-        print('NOTA: Utilice el siguiente formato (Ciudad origen, Ciudad destino, Distancia en Km)')
+        print('\nAhora porfavor escriba las rutas existentes entre las ciudades: ')
+        print('NOTA: Utilice el siguiente formato (Ciudad origen, Ciudad destino, Distancia en Km)\n')
         caminoExit = True
         while caminoExit:
             camino = []
@@ -89,16 +92,49 @@ while exit:
         
         time.sleep(PAUSE_DURATION)
     elif opcionMenuPrincipal == 3:
-        print('Ruta entre ciudades')
-        time.sleep(PAUSE_DURATION)
+        if grafoCreado:
+            origin = input('Porfavor ingrese la ciudad donde desea empezar: ')
+            end = input('Ingrese la ciudad donde desea terminar: ')
+            print(f'Todas las rutas para ir de {origin} hasta {end} son:')
+            for path in nx.all_simple_paths(grafoCiudades, source=origin, target=end):
+                print(path)
+            input()
+        else:
+            print('Porfavor cree el grafo para poder obtener las rutas')
+            time.sleep(PAUSE_DURATION)
+
     elif opcionMenuPrincipal == 4:
-        print('Ruta a partir de una ciudad a otra')
-        time.sleep(PAUSE_DURATION)
+        if grafoCreado:
+            origin = input('Porfavor ingrese la ciudad donde desea empezar: ')
+            end = input('Ingrese la ciudad donde desea terminar: ')
+            print(f'La ruta mas corta para ir de {origin} hasta {end} es:')
+            print(*nx.shortest_path(grafoCiudades, source=origin, target=end, weight='weight'), sep=' -> ')
+            input()
+        else:
+            print('Porfavor cree el grafo para poder obtener la ruta')
+            time.sleep(PAUSE_DURATION)
+
     elif opcionMenuPrincipal == 5:
-        canvasCiudades = Network('650px', '850px')
-        canvasCiudades.from_nx(grafoCiudades)
-        canvasCiudades.show('GraficoCiudades.html')
-        time.sleep(PAUSE_DURATION)
+        if grafoCreado: 
+            pos = nx.planar_layout(grafoCiudades)
+
+            nx.draw_networkx_nodes(grafoCiudades, pos, node_size=700)
+            nx.draw_networkx_edges(grafoCiudades, pos, width=2, edge_color='gray')
+
+            nx.draw_networkx_labels(grafoCiudades, pos, font_size=15, font_family="sans-serif")
+
+            edge_labels = nx.get_edge_attributes(grafoCiudades, "weight")
+            nx.draw_networkx_edge_labels(grafoCiudades, pos, edge_labels)
+
+            ax = plt.gca()
+            ax.margins(0.08)
+            plt.axis("off")
+            plt.tight_layout()
+            plt.show()
+        else:
+            print('Porfavor cree el grafo para poder imprimirlo graficamente')
+            time.sleep(PAUSE_DURATION)
+
     elif opcionMenuPrincipal == 6:
         exit = False
     else:
