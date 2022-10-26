@@ -2,6 +2,7 @@
 - Creado el menu principal
 - Copiada la hoja de presentacion
 - Creado la parte de la creacion e impresion del grafico
+- Proyecto terminado
 
 # Proyecto-N-2-ED-2
 <p>Haga una aplicación que encuentre las rutas entre ciudades. Solicite el nombre de las
