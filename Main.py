@@ -1,7 +1,6 @@
 import time
 from os import system
 import networkx as nx
-from pyvis.network import Network
 import matplotlib.pyplot as plt
 
 def obtenerOpcion():
